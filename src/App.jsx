@@ -1,50 +1,23 @@
-import { useQuery, gql } from '@apollo/client';
 import { useState } from 'react';
+import { Modal } from './Modal';
+import { useCharacters } from './hooks/useCharacters';
 import { BeatLoader } from 'react-spinners';
 import './App.css';
 
-const GET_CHARACTERS_RICK_AND_MORTY = gql`
-  query GetCharacters($page: Int!) {
-    characters(page: $page) {
-      info {
-        count
-        pages
-        next
-        prev
-      }
-      results {
-        id
-        name
-        image
-        status
-        species
-      }
-    }
-  }
-`;
-
 function App() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCharacter, setSelectedCharacter] = useState(null); // Nuevo estado
 
-  const { loading, error, data } = useQuery(GET_CHARACTERS_RICK_AND_MORTY, {
-    variables: { page: currentPage },
-  });
+  const {
+    loading,
+    error,
+    data,
+    currentPage,
+    goToPage,
+    handleNextPage,
+    handlePrevPage,
+  } = useCharacters();
 
-  const handleNextPage = () => {
-    if (data?.characters.info.next) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (data?.characters.info.prev) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const goToPage = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  const handleCloseModal = () => setSelectedCharacter(null);
 
   if (loading)
     return (
@@ -91,11 +64,21 @@ function App() {
         {/* Lista de personajes */}
         <div className="characters-grid">
           {results.map((character) => (
-            <div key={character.id} className="character-card">
+            <div
+              key={character.id}
+              className="character-card"
+              onClick={() => setSelectedCharacter(character)} // Nuevo: click handler
+              style={{ cursor: 'pointer' }}
+            >
               <img src={character.image} alt={character.name} />
               <h3>{character.name}</h3>
-              <p>Status: {character.status}</p>
-              <p>Species: {character.species}</p>
+              <p className="text-card">
+                <span className="text-accent">Status:</span> {character.status}
+              </p>
+              <p className="text-card">
+                <span className="text-accent">Species:</span>{' '}
+                {character.species}
+              </p>
             </div>
           ))}
         </div>
@@ -154,6 +137,12 @@ function App() {
             Siguiente →
           </button>
         </div>
+
+        {/* Modal */}
+        <Modal
+          selectedCharacter={selectedCharacter}
+          handleCloseModal={handleCloseModal}
+        />
       </div>
     </div>
   );
