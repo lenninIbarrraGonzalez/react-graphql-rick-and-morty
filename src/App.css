@@ -125,6 +125,8 @@
 
 @media (max-width: 480px) {
   .modal-backdrop {
+    display: flex;
+    align-items: self-end;
     height: 100%;
   }
 }
