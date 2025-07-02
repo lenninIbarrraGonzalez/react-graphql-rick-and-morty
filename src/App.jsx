@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal } from './Modal';
 import { useCharacters } from './hooks/useCharacters';
 import { BeatLoader } from 'react-spinners';
@@ -18,6 +18,16 @@ function App() {
   } = useCharacters();
 
   const handleCloseModal = () => setSelectedCharacter(null);
+
+  useEffect(() => {
+    if (selectedCharacter) {
+      document.body.classList.add('body-modal-open');
+    } else {
+      document.body.classList.remove('body-modal-open');
+    }
+    // Limpieza por si acaso
+    return () => document.body.classList.remove('body-modal-open');
+  }, [selectedCharacter]);
 
   if (loading)
     return (
