@@ -6,7 +6,9 @@ Este proyecto es una SPA construida con **React** y **Vite** que consume la API 
 
 ![Texto alternativo](/src/assets/preview.gif)
 
----
+[ver sitio en netlify](https://rick-neumorphism.netlify.app/)
+
+## ![Texto alternativo](/src/assets/rick-neumorphism.gif)
 
 ## Arquitectura
 
