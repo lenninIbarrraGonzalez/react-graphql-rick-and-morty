@@ -2,6 +2,8 @@
 
 Este proyecto es una SPA construida con **React** y **Vite** que consume la API GraphQL de Rick and Morty. Permite explorar personajes, ver detalles en un modal y navegar entre páginas con un diseño moderno y responsivo.
 
+[ver sitio en netlify](https://rick-and-morty-graphql.netlify.app/)
+
 ![Texto alternativo](/src/assets/preview.gif)
 
 ---
