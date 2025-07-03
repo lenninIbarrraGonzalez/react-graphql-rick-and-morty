@@ -60,12 +60,12 @@ function App() {
   return (
     <div className="container">
       <div className="app">
-        <h1>React + GraphQL</h1>
-        <p>Personajes de Rick and Morty</p>
+        <h1 className="main-title">React + GraphQL</h1>
+        <p className="main-subtitle">Personajes de Rick and Morty</p>
 
         {/* Información de paginación */}
         <div className="pagination-info">
-          <p>
+          <p className="pagination-summary">
             Página {currentPage} de {info.pages} | Total de personajes:{' '}
             {info.count}
           </p>
@@ -98,7 +98,7 @@ function App() {
           <button
             onClick={handlePrevPage}
             disabled={!info.prev}
-            className="pagination-btn"
+            className="page-btn"
           >
             ← Anterior
           </button>
@@ -142,7 +142,7 @@ function App() {
           <button
             onClick={handleNextPage}
             disabled={!info.next}
-            className="pagination-btn"
+            className="page-btn"
           >
             Siguiente →
           </button>
